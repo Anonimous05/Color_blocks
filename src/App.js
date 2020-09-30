@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
 
 function App() {
+
+  const [state,setState] = useState({
+    num: 1,
+  });
+
+  const newBlockHandler = (e) => {
+    const block = document.createElement('div');
+    block.className = e.target.className;
+    const dom = document.getElementById('blocks2');
+    dom.prepend(block);
+    setState({...state, num: state.num + 1});
+    if(state.num > 5){
+      dom.lastChild.remove()
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="blocks">
+        <div className="red" onClick={newBlockHandler}></div>
+        <div className="green" onClick={newBlockHandler}></div>
+        <div className="blue" onClick={newBlockHandler}></div>
+        <div className="yellow" onClick={newBlockHandler}></div>
+        <div className="black" onClick={newBlockHandler}></div>
+        <div className="grey" onClick={newBlockHandler}></div>
+      </div>
+      <div id="blocks2">
+
+      </div>
     </div>
   );
 }
